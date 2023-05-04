@@ -44,8 +44,65 @@ module.exports = function () {
         });
 
     })
+
+    router.post('/update-pizzacount/:id/:count', function (req, res) {
+        console.log(req.params.count, "Countt")
+        console.log(req.params.id, "Countt")
+        Cart.findOneAndUpdate(
+            { _id: '64524983766b780eb43d0edf' }, // filter the cart document by its ID
+            { 'CartDetails.$[elem].PizzaCount': req.params.count }, // update the PizzaCount of a specific CartDetail element
+            { arrayFilters: [{ 'elem._id': req.params.id }] } // filter the CartDetail element by its ID
+        )
+            .then(() => {
+                console.log('Cart updated successfully');
+                var data = {
+                    Status: "Done",
+                    Message: "Removed"
+                }
+                res.status(200).send(data);
+            })
+            .catch((err) => {
+                console.error(err);
+                var data = {
+                    Status: "Done",
+                    Message: "Removed"
+                }
+                res.status(200).send(data);
+            });
+
+    })
+
+    router.post('/update-FinalPrice/:id/:price', function (req, res) {
+        console.log(req.params.count, "Countt")
+        console.log(req.params.id, "Countt")
+        Cart.findOneAndUpdate(
+            { _id: '64524983766b780eb43d0edf' }, // filter the cart document by its ID
+            { 'CartDetails.$[elem].FianlOrderPrice': req.params.price }, // update the PizzaCount of a specific CartDetail element
+            { arrayFilters: [{ 'elem._id': req.params.id }] } // filter the CartDetail element by its ID
+        )
+            .then(() => {
+                console.log('Cart updated successfully');
+                var data = {
+                    Status: "Done",
+                    Message: "Removed"
+                }
+                res.status(200).send(data);
+            })
+            .catch((err) => {
+                console.error(err);
+                var data = {
+                    Status: "Done",
+                    Message: "Removed"
+                }
+                res.status(200).send(data);
+            });
+
+    })
+
+
+
     router.post('/remove-item/:id', function (req, res) {
-        console.log(req.params.id,"Bodyy")
+        console.log(req.params.id, "Bodyy")
         Cart.updateOne(
             { _id: "64524983766b780eb43d0edf" },
             { $pull: { CartDetails: { _id: req.params.id } } },

@@ -8,7 +8,7 @@ let pizzadata = new Schema({
     },
     PizzaName: {
         type: String
-    }, 
+    },
     SelectedPizzaSize: {
         type: String
     },
@@ -187,6 +187,9 @@ let pizzadata = new Schema({
         type: String
     },
     FianlOrderPrice: {
+        type: String
+    },
+    OncePizzaPrice: {
         type: String
     }
 

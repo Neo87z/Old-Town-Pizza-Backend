@@ -187,6 +187,9 @@ let Cart = new Schema({
         },
         FianlOrderPrice: {
             type: String
+        },
+        OncePizzaPrice: {
+            type: String
         }
 
     }]
