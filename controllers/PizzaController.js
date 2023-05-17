@@ -4,6 +4,9 @@ var _ = require("underscore");
 let PizzaData = require('../models/PizzaData');
 let Cart = require('../models/Cart');
 
+let OrderData = require('../models/ConfirmedOrder');
+const OrderModel = require("../models/ConfirmedOrder"); // Assuming the model file is in a separate file
+
 
 module.exports = function () {
 
@@ -24,6 +27,54 @@ module.exports = function () {
                 }
                 res.status(200).send(data);
             });
+
+    })
+
+
+
+    router.post('/add-order', function (req, res) {
+
+        console.log(req.body)
+        let PizzaDataJSON = new OrderModel(req.body);
+        PizzaDataJSON.save()
+            .then(Course => {
+                var data = {
+                    Status: "Sucess",
+                    Message: "Successfully Added A New Pizza"
+                }
+                res.status(201).send(data);
+            }).catch(err => {
+                var data = {
+                    Status: "Fail",
+                    Message: "Unexpected Error PLease Contact System Admin"
+                }
+                res.status(200).send(data);
+            });
+
+
+        // Create a new order instance
+
+
+    })
+
+    router.get('/get-all-orders-for-customer/:id', function (req, res) {
+        OrderModel.find({}, (err, orders) => {
+            if (err) {
+                console.error(err);
+                return;
+            } else {
+                console.log(orders);
+                var data = {
+                    Status: "Pass",
+                    Message: "Unexpected Error PLease Contact System Admin",
+                    Data: orders
+                }
+                res.status(200).send(data);
+
+            }
+
+
+        });
 
     })
 
