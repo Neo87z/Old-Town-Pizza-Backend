@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const PizzaController = require('./controllers/PizzaController');
+const CustomerController = require('./controllers/CustomerController');
 
 dotenv.config();
 const app = express();
@@ -28,6 +29,7 @@ mongoose.connection.once('open', () => {
 });
 
 app.use('/pizza', PizzaController());
+app.use('/customer', CustomerController());
 
 
 
